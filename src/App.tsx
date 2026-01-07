@@ -36,7 +36,10 @@ function App() {
 
       {/* Fixed Background at the very bottom */}
       <div className="page-background">
-        <img src="/pic/~2ZDY(VVFDCT$QV59Q%]Y_3.png" alt="Background" />
+        <img
+          src={`${import.meta.env.BASE_URL}pic/~2ZDY(VVFDCT$QV59Q%]Y_3.png`}
+          alt="Background"
+        />
         <div className="background-overlay" />
       </div>
 
