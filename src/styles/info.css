@@ -1,0 +1,29 @@
+/* Info Section Styles */
+
+.info-section {
+  background: var(--color-background);
+  padding: calc(20vw + var(--space-8)) var(--space-8) var(--space-8)
+    var(--space-8);
+  width: 100%;
+}
+
+.info-content {
+  margin: 0 auto;
+  text-transform: uppercase;
+  margin-top: 10vw;
+  margin-bottom: 15vw;
+}
+
+.info-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-3);
+  align-items: start;
+}
+
+.info-columns p {
+  font-size: var(--text-lg);
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+  margin: 0;
+}

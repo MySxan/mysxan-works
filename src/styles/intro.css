@@ -1,0 +1,231 @@
+/* Intro Stage - Scroll Narrative Styles */
+
+/* Page Background - shown at the very bottom after all content */
+.page-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.page-background img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.page-background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 52, 93, 0.72);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* Intro Stage - scroll narrative container */
+.intro-stage {
+  position: relative;
+  min-height: 200vh;
+  background: transparent;
+}
+
+/* Hero Section - fixed at viewport */
+.intro-hero-section {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  padding-bottom: var(--space-2);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: var(--hero-opacity, 1);
+  transform: translateY(var(--hero-translateY, 0));
+  transition: opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
+    transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: auto;
+}
+
+.hero-overlay .hero {
+  padding-top: 0;
+  min-height: auto;
+  color: var(--clr-white);
+}
+
+.hero-overlay .hero * {
+  color: var(--clr-white);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+.hero-overlay .hero .btn,
+.hero-overlay .hero .btn-link {
+  border-color: var(--clr-white);
+  color: var(--clr-white);
+  text-shadow: none;
+}
+
+.hero-overlay .hero .btn:hover,
+.hero-overlay .hero .btn-link:hover {
+  background: var(--clr-white);
+  color: var(--clr-black);
+}
+
+/* Title Layer - fixed at top */
+.title-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  mix-blend-mode: difference;
+  color: var(--clr-white);
+  pointer-events: none;
+  padding: 0;
+  margin: 0;
+    overflow: visible;
+  transition: none;
+  transform: translateZ(0);
+}
+
+.site-title {
+  width: 100%;
+  font-size: 18vw;
+  font-weight:lighter;
+  letter-spacing: 0;
+  margin: 0;
+  padding: 0;
+  text-transform: uppercase;
+  line-height: 0.75;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  overflow: visible;
+}
+
+.site-subtitle {
+  color: #ffffff;
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  margin: var(--space-1) 0 0;
+  font-weight: bold;
+  padding: var(--space-2);
+  text-transform: uppercase;
+  opacity: 1;
+  width: 100%;
+  text-align: left;
+}
+
+/* Spacer to create scroll space */
+.intro-spacer {
+  text-align: center;
+  height: 100vh;
+}
+
+/* Letter-by-letter entrance animation (inspired by reference hero) */
+.site-title .letter {
+  display: inline-flex;
+  overflow: visible;
+}
+.site-title .letter > span {
+  display: inline-flex;
+  transform: translateY(-108%);
+  transition: transform 1.3s cubic-bezier(0.23, 1, 0.32, 1) var(--delay, 0s);
+}
+.hero-in .site-title .letter > span {
+  transform: translateY(0);
+}
+
+/* Sticky hero cover overlay that scales with scroll progress */
+.hero-home-overlay {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: 100vh;
+  pointer-events: none;
+}
+.hero-home-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-bg);
+  transform-origin: bottom;
+  transform: scaleY(var(--cover));
+}
+
+/* Content Section - normal flow with white background */
+.intro-content {
+  position: relative;
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding-top: calc(120px + var(--space-3));
+  z-index: 10;
+  box-shadow: 0 -2px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Main and Footer should cover background */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+.footer {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+}
+
+/* Navbar visibility control */
+.navbar {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease-out;
+}
+
+.navbar.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .intro-stage {
+    height: 180vh;
+  }
+
+  .site-title {
+    font-size: var(--text-3xl);
+    padding: 0 0.75rem;
+    padding-top: 0.75rem;
+  }
+
+  .site-subtitle {
+    font-size: var(--text-base);
+    padding-top: 0;
+  }
+
+  .white-panel {
+    top: 100px;
+  }
+}
