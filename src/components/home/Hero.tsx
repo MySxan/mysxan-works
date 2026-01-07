@@ -30,7 +30,9 @@ export function Hero() {
               {skills.map((skill, idx) => (
                 <li
                   key={skill}
-                  style={{ "--delay": `${0.3 + idx * 0.05}s` } as React.CSSProperties}
+                  style={
+                    { "--delay": `${0.3 + idx * 0.05}s` } as React.CSSProperties
+                  }
                 >
                   <span className="skill-label">{skill.toUpperCase()}</span>
                   {idx === 0 && (

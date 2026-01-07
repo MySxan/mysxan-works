@@ -104,7 +104,7 @@
   pointer-events: none;
   padding: 0;
   margin: 0;
-    overflow: visible;
+  overflow: visible;
   transition: none;
   transform: translateZ(0);
 }
@@ -112,7 +112,7 @@
 .site-title {
   width: 100%;
   font-size: 18vw;
-  font-weight:lighter;
+  font-weight: lighter;
   letter-spacing: 0;
   margin: 0;
   padding: 0;
