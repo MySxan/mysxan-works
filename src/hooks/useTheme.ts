@@ -4,29 +4,19 @@ import { useEffect, useState } from "react";
 export type Theme = "light" | "dark";
 
 export function useTheme() {
-  const [theme, setTheme] = useState<Theme>("light");
-  const [isLoaded, setIsLoaded] = useState(false);
+  const getInitialTheme = (): Theme => {
+    if (typeof window === "undefined") return "light";
 
-  // Initialize theme on mount
-  useEffect(() => {
-    // Check localStorage first
     const storedTheme = localStorage.getItem("theme") as Theme | null;
+    if (storedTheme) return storedTheme;
 
-    if (storedTheme) {
-      setTheme(storedTheme);
-      applyTheme(storedTheme);
-    } else {
-      // Check system preference
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      const initialTheme: Theme = prefersDark ? "dark" : "light";
-      setTheme(initialTheme);
-      applyTheme(initialTheme);
-    }
+    const prefersDark = window.matchMedia(
+      "(prefers-color-scheme: dark)"
+    ).matches;
+    return prefersDark ? "dark" : "light";
+  };
 
-    setIsLoaded(true);
-  }, []);
+  const [theme, setTheme] = useState<Theme>(getInitialTheme);
 
   const applyTheme = (newTheme: Theme) => {
     document.documentElement.setAttribute("data-theme", newTheme);
@@ -39,9 +29,13 @@ export function useTheme() {
     applyTheme(newTheme);
   };
 
+  // Initialize theme on mount
+  useEffect(() => {
+    applyTheme(theme);
+  }, [theme]);
+
   return {
     theme,
     toggleTheme,
-    isLoaded,
   };
 }

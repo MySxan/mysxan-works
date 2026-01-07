@@ -8,7 +8,6 @@ import App from "./App.tsx";
 const lenis = new Lenis({
   lerp: 0.12, // easing strength
   smoothWheel: true, // enable for global smooth scrolling
-  smoothTouch: true,
 });
 
 // Expose lenis globally for IntroStage

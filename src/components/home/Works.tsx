@@ -21,7 +21,7 @@ export function Works() {
       const columnWidth = (grid.offsetWidth - gap * (columns - 1)) / columns;
       const columnHeights = new Array(columns).fill(0);
 
-      items.forEach((item, index) => {
+      items.forEach((item) => {
         // Find shortest column
         const shortestColumn = columnHeights.indexOf(
           Math.min(...columnHeights)
