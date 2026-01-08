@@ -345,7 +345,6 @@ h6 {
   line-height: var(--line-height-tight);
   letter-spacing: -0.04em;
   text-transform: uppercase;
-  margin: 0;
 }
 
 h1 {
@@ -602,7 +601,7 @@ a:hover {
 
 .card-footer {
   padding: var(--space-3);
-  border-top: 1px solid var(--color-border);
+  border-top: none;
   display: flex;
   gap: var(--space-2);
 }
@@ -745,7 +744,7 @@ a:hover {
   order: 1;
   /* Enable per-card horizontal snap */
   scroll-snap-type: x mandatory;
-  overscroll-behavior-x: contain;
+  overscroll-behavior-x: none;
   /* Allow trailing blank space at the right edge */
   scroll-padding-right: var(--works-end-spacer, 0px);
 }
@@ -1558,10 +1557,12 @@ a:hover {
   border: none;
   border-bottom: 1px solid var(--color-border);
   background: transparent;
+  color: var(--color-text);
   cursor: pointer;
   transition: all var(--transition-base);
   text-align: left;
   font-family: var(--font-family);
+  font-size: inherit;
   transform: translateX(0);
   position: relative;
   line-height: 1.1;
@@ -1574,6 +1575,12 @@ a:hover {
 
 .projects-list-item:hover {
   transform: translateX(var(--space-2));
+  color: var(--color-text);
+}
+
+.projects-list-item:focus {
+  outline: none;
+  color: var(--color-text);
 }
 
 .projects-list-item-title {
@@ -1635,6 +1642,12 @@ a:hover {
   position: absolute;
   width: 100%;
   min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projects-detail .card-body {
+  flex: 1;
 }
 
 .projects-detail.slide-down {

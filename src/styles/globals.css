@@ -76,6 +76,14 @@
   --color-border-light: #404040;
 }
 
+[data-theme="dark"] .projects-list-item {
+  color: #ffffff;
+}
+
+[data-theme="dark"] .projects-list-item.active .projects-list-item-year {
+  color: #ffffff;
+}
+
 /* Reset and defaults */
 *,
 *::before,

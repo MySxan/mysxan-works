@@ -119,31 +119,6 @@ export function Works() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Native wheel listener to enforce per-card horizontal stepping across browsers
-  useEffect(() => {
-    const el = gridRef.current;
-    if (!el) return;
-    const nativeWheel = (ev: WheelEvent) => {
-      if (!gridRef.current) return;
-      const delta =
-        Math.abs(ev.deltaX) > Math.abs(ev.deltaY) ? ev.deltaX : ev.deltaY;
-      if (delta === 0) return;
-      ev.preventDefault();
-      const dir = delta > 0 ? 1 : -1;
-      const columnWidth = getColumnWidth();
-      const scrollLeft = gridRef.current.scrollLeft;
-      const baseIndex =
-        dir > 0
-          ? Math.floor(scrollLeft / columnWidth)
-          : Math.ceil(scrollLeft / columnWidth);
-      const newIndex = baseIndex + dir;
-      const target = Math.min(Math.max(0, newIndex * columnWidth), maxScroll);
-      gridRef.current.scrollTo({ left: target, behavior: "smooth" });
-    };
-    el.addEventListener("wheel", nativeWheel, { passive: false });
-    return () => el.removeEventListener("wheel", nativeWheel);
-  }, [maxScroll]);
-
   const handleScrollLeft = () => {
     if (gridRef.current) {
       const columnWidth = getColumnWidth();
@@ -170,13 +145,11 @@ export function Works() {
     }
   };
 
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const handleScroll = () => {
     if (gridRef.current) {
       const scrollLeft = gridRef.current.scrollLeft;
-      // Hard clamp: do not allow scrolling beyond the last fully visible column
-      if (scrollLeft > maxScroll) {
-        gridRef.current.scrollTo({ left: maxScroll, behavior: "auto" });
-      }
       setIsAtStart(scrollLeft === 0);
 
       // Calculate current column based on scroll position
@@ -186,26 +159,27 @@ export function Works() {
       );
       const maxDotIndex = getMaxDotIndex();
       setActiveColumn(Math.min(currentColumn, maxDotIndex));
+
+      // Debounce the scroll limiting to avoid interrupting momentum
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      scrollTimeoutRef.current = setTimeout(() => {
+        if (gridRef.current && gridRef.current.scrollLeft > maxScroll) {
+          gridRef.current.scrollTo({ left: maxScroll, behavior: "smooth" });
+        }
+      }, 150);
     }
   };
 
   const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    if (!gridRef.current) return;
-    const grid = gridRef.current;
-    const delta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
-    if (delta === 0) return;
-    e.preventDefault();
-
-    const dir = delta > 0 ? 1 : -1;
-    const columnWidth = getColumnWidth();
-    const scrollLeft = grid.scrollLeft;
-    const baseIndex =
-      dir > 0
-        ? Math.floor(scrollLeft / columnWidth)
-        : Math.ceil(scrollLeft / columnWidth);
-    const newIndex = baseIndex + dir;
-    const target = Math.min(Math.max(0, newIndex * columnWidth), maxScroll);
-    grid.scrollTo({ left: target, behavior: "smooth" });
+    // Only prevent vertical scrolling that would translate to horizontal movement
+    // Allow natural horizontal scrolling (deltaX) and let the browser handle momentum
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      // This is primarily vertical scrolling, prevent it
+      e.preventDefault();
+    }
+    // If deltaX is larger, allow natural horizontal scrolling behavior
   };
 
   return (
