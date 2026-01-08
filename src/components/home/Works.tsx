@@ -146,6 +146,62 @@ export function Works() {
   };
 
   const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const isDragging = useRef(false);
+  const hasDragged = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!gridRef.current) return;
+    isDragging.current = true;
+    hasDragged.current = false;
+    startX.current = e.pageX - gridRef.current.offsetLeft;
+    scrollLeft.current = gridRef.current.scrollLeft;
+    gridRef.current.style.scrollBehavior = "auto";
+    // Disable snap during drag for smooth scrolling
+    gridRef.current.style.scrollSnapType = "none";
+  };
+
+  const handleMouseLeave = () => {
+    if (!gridRef.current) return;
+    isDragging.current = false;
+    gridRef.current.style.scrollBehavior = "smooth";
+    // Re-enable snap after drag
+    gridRef.current.style.scrollSnapType = "x mandatory";
+  };
+
+  const handleMouseUp = () => {
+    if (!gridRef.current) return;
+    isDragging.current = false;
+    gridRef.current.style.scrollBehavior = "smooth";
+    // Re-enable snap after drag
+    gridRef.current.style.scrollSnapType = "x mandatory";
+    // Reset hasDragged after a short delay to allow click handlers to check it
+    setTimeout(() => {
+      hasDragged.current = false;
+    }, 50);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!isDragging.current || !gridRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - gridRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+
+    // Mark as dragged if moved more than 5px
+    if (Math.abs(walk) > 5) {
+      hasDragged.current = true;
+    }
+
+    gridRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const handleCardClick = (work: Work) => {
+    // Prevent click if user was dragging
+    if (!hasDragged.current) {
+      setSelectedWork(work);
+    }
+  };
 
   const handleScroll = () => {
     if (gridRef.current) {
@@ -172,14 +228,8 @@ export function Works() {
     }
   };
 
-  const handleWheel = (e: React.WheelEvent<HTMLDivElement>) => {
-    // Only prevent vertical scrolling that would translate to horizontal movement
-    // Allow natural horizontal scrolling (deltaX) and let the browser handle momentum
-    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-      // This is primarily vertical scrolling, prevent it
-      e.preventDefault();
-    }
-    // If deltaX is larger, allow natural horizontal scrolling behavior
+  const handleWheel = () => {
+    // Let browser handle both vertical (page) and horizontal (grid) scrolling naturally
   };
 
   return (
@@ -196,13 +246,17 @@ export function Works() {
                 className="works-grid"
                 onScroll={handleScroll}
                 onWheel={handleWheel}
+                onMouseDown={handleMouseDown}
+                onMouseLeave={handleMouseLeave}
+                onMouseUp={handleMouseUp}
+                onMouseMove={handleMouseMove}
               >
                 {works.map((work, index) => (
                   <WorkCard
                     key={work.id}
                     work={work}
                     index={index}
-                    onClick={() => setSelectedWork(work)}
+                    onClick={() => handleCardClick(work)}
                   />
                 ))}
                 {/* Spacer to ensure right-side blank area exists when at last column */}
@@ -213,41 +267,36 @@ export function Works() {
               <div className="works-edge-mask" />
               <div
                 className={`works-triangle ${isAtStart ? "visible" : "hidden"}`}
-              >
-                ▶
-              </div>
-            </div>
-
-            {/* Navigation bar */}
-            <div className="works-nav">
-              <button
-                className="works-nav-btn works-nav-btn-left"
-                onClick={handleScrollLeft}
-                aria-label="Scroll left"
-              >
-                ◀
-              </button>
-              <div className="works-nav-dots">
-                {Array.from({ length: dotCount }).map((_, i) => (
-                  <button
-                    key={i}
-                    className={`works-nav-dot ${
-                      i === activeColumn ? "active" : ""
-                    }`}
-                    onClick={() => handleDotClick(i)}
-                    aria-label={`Go to column ${i + 1}`}
-                  />
-                ))}
-              </div>
-              <button
-                className="works-nav-btn works-nav-btn-right"
-                onClick={handleScrollRight}
-                aria-label="Scroll right"
-              >
-                ▶
-              </button>
+                aria-hidden="true"
+              />
             </div>
           </div>
+        </div>
+
+        {/* Navigation bar */}
+        <div className="works-nav">
+          <button
+            className="works-nav-btn works-nav-btn-left"
+            onClick={handleScrollLeft}
+            aria-label="Scroll left"
+          />
+          <div className="works-nav-dots">
+            {Array.from({ length: dotCount }).map((_, i) => (
+              <button
+                key={i}
+                className={`works-nav-dot ${
+                  i === activeColumn ? "active" : ""
+                }`}
+                onClick={() => handleDotClick(i)}
+                aria-label={`Go to column ${i + 1}`}
+              />
+            ))}
+          </div>
+          <button
+            className="works-nav-btn works-nav-btn-right"
+            onClick={handleScrollRight}
+            aria-label="Scroll right"
+          />
         </div>
       </Section>
 

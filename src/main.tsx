@@ -10,8 +10,25 @@ const lenis = new Lenis({
   smoothWheel: true, // enable for global smooth scrolling
 });
 
-// Expose lenis globally for IntroStage
+// Expose lenis globally for control
 window.__lenis = lenis;
+
+// Extend Lenis with stop/start methods for full-page scroll
+const originalStop = lenis.stop.bind(lenis);
+const originalStart = lenis.start.bind(lenis);
+
+interface LenisGlobal extends Window {
+  __lenis_stop: () => void;
+  __lenis_start: () => void;
+}
+
+(window as unknown as LenisGlobal).__lenis_stop = () => {
+  originalStop();
+};
+
+(window as unknown as LenisGlobal).__lenis_start = () => {
+  originalStart();
+};
 
 const raf = (time: number) => {
   lenis.raf(time);

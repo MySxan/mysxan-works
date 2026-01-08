@@ -1,7 +1,13 @@
 // Hero section component - main landing section with introduction
 import { Container } from "../ui/Container";
 
-export function Hero() {
+interface HeroProps {
+  lang: "EN" | "ZH";
+  toggleLang: () => void;
+}
+
+export function Hero(_props: HeroProps) {
+  // Props passed for future i18n, currently unused
   const skills = [
     "Full Stack",
     "UI/UX",

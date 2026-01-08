@@ -5,6 +5,8 @@ import { Hero } from "../home/Hero";
 interface IntroStageProps {
   onScrollComplete: (completed: boolean) => void;
   children: ReactNode;
+  lang: "EN" | "ZH";
+  toggleLang: () => void;
 }
 
 // Get Lenis instance from global window
@@ -21,7 +23,12 @@ declare global {
   }
 }
 
-export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
+export function IntroStage({
+  onScrollComplete,
+  children,
+  lang,
+  toggleLang,
+}: IntroStageProps) {
   const [cover, setCover] = useState(0);
   const [titleTransform, setTitleTransform] = useState(0);
   const [heroIn, setHeroIn] = useState(false);
@@ -195,6 +202,8 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
         } as React.CSSProperties
       }
     >
+      {/* Hero cover overlay (sticky), scales up with scroll progress */}
+      <div className="hero-home-overlay" aria-hidden="true" />
       {/* Title Layer - fixed at top */}
       <div
         className="title-layer"
@@ -213,13 +222,30 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
             </span>
           ))}
         </h1>
-        <p className="site-subtitle">Developer & Designer</p>
+        <div className="subtitle-row">
+          <p className="site-subtitle">Developer & Designer</p>
+          <div className="hero-lang-toggle">
+            <button
+              className={`hero-lang-btn ${lang === "EN" ? "active" : ""}`}
+              onClick={toggleLang}
+            >
+              EN
+            </button>
+            <span className="hero-lang-sep">-</span>
+            <button
+              className={`hero-lang-btn ${lang === "ZH" ? "active" : ""}`}
+              onClick={toggleLang}
+            >
+              ZH
+            </button>
+          </div>
+        </div>
       </div>
 
       {/* Hero Section - absolute positioned at top */}
       <div className="intro-hero-section">
         <div className="hero-overlay">
-          <Hero />
+          <Hero lang={lang} toggleLang={toggleLang} />
         </div>
       </div>
 
