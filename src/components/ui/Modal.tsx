@@ -1,5 +1,6 @@
 // Modal component - accessible modal with focus trap, keyboard handling, and backdrop click
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { ButtonLink } from "./Button";
 
 interface ModalProps {
@@ -20,6 +21,7 @@ export function Modal({
   children,
   externalLink,
 }: ModalProps) {
+  const { t } = useTranslation();
   const modalRef = useRef<HTMLDivElement>(null);
   const firstFocusableRef = useRef<HTMLButtonElement>(null);
 
@@ -117,7 +119,7 @@ export function Modal({
             ref={firstFocusableRef}
             className="modal-close"
             onClick={onClose}
-            aria-label="Close modal"
+            aria-label={t("modal.close")}
           >
             <span aria-hidden="true">&times;</span>
           </button>

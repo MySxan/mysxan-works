@@ -1,0 +1,83 @@
+{
+  "app": {
+    "quickToggles": "快捷切换",
+    "switchTheme": "切换到{{mode}}模式",
+    "switchLanguage": "切换语言到{{lang}}"
+  },
+  "mode": {
+    "light": "浅色",
+    "dark": "深色"
+  },
+  "nav": {
+    "projects": "项目",
+    "works": "作品",
+    "about": "关于",
+    "contact": "联系"
+  },
+  "intro": {
+    "subtitle": "开发 & 设计"
+  },
+  "hero": {
+    "tagline": "全栈开发者 & 创意内容创作者",
+    "intro": "灵感/创造/表达",
+    "skills": [
+      { "label": "全栈", "sub": "React & TypeScript" },
+      { "label": "UI/UX", "sub": "交互设计" },
+      { "label": "设计", "sub": "Logo & 字体" },
+      { "label": "GFX 与插画", "sub": "专辑 / 横幅 / 海报" },
+      { "label": "作曲", "sub": "DnB / Prog. House / ARTCORE" }
+    ]
+  },
+  "info": {
+    "paragraphIntro": "我一直在尝试用创作的方式表达我对世界的理解：无论是代码或是视听表达，我会使用不同的媒介努力尝试创造具有生命力的艺术作品与用户体验",
+    "paragraph": "我喜欢整洁的代码和简单却不失内涵的思维表达，以及那些能够让人会心一笑的交互细节<br/>我的创作涉足了许多领域：Logo，GFX，字体等平面视觉设计，插画，以及音乐创作<br/><i>DnB / Progressive House / Artcore</i><br/>虽然尽管我可能不擅长表达，但是我仍然热爱创造，并尽我最大的努力把这种视觉敏感度带入每一个我设计并交付的作品中"
+  },
+  "projects": {
+    "title": "项目",
+    "links": {
+      "repository": "代码仓库",
+      "liveDemo": "在线演示",
+      "caseStudy": "案例研究"
+    }
+  },
+  "works": {
+    "title": "作品",
+    "view": "查看",
+    "viewItem": "查看{{title}}",
+    "nav": {
+      "scrollLeft": "向左滚动",
+      "scrollRight": "向右滚动",
+      "goToColumn": "跳转到第{{index}}列"
+    },
+    "modal": {
+      "viewFullProject": "查看完整项目",
+      "type": "类型",
+      "year": "年份"
+    }
+  },
+  "about": {
+    "title": "关于",
+    "timelineTitle": "历程"
+  },
+  "contact": {
+    "title": "联系",
+    "description": "无论是设计交流/编曲合作/咨询委托或是单纯交友，都请随意添加 QQ 或者发送邮件联系！",
+    "emailLabel": "邮箱",
+    "telLabel": "电话",
+    "connectLabel": "社交",
+    "copy": "复制",
+    "copyEmailTitle": "复制邮箱地址",
+    "copyEmailAria": "复制邮箱到剪贴板",
+    "toast": {
+      "copySuccess": "邮箱已复制到剪贴板！",
+      "copyError": "复制邮箱失败"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} MySxan. 保留所有权利。",
+    "tagline": "以 React、TypeScript 与但愿永远燃烧的创作倾情打造。"
+  },
+  "modal": {
+    "close": "关闭弹窗"
+  }
+}

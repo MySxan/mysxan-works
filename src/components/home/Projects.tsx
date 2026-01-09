@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { showcaseProjects, type ProjectLink } from "../../data/projects";
 import { Section } from "../ui/Section";
 
@@ -15,6 +16,7 @@ const pickBtnClass = (variant?: ProjectLink["variant"]) => {
 };
 
 export function Projects() {
+  const { t } = useTranslation();
   const [selectedId, setSelectedId] = useState(showcaseProjects[0]?.id || "");
   const [prevId, setPrevId] = useState(selectedId);
   const [prevIndex, setPrevIndex] = useState(0);
@@ -30,6 +32,15 @@ export function Projects() {
   };
 
   const slideDirection = currentIndex > prevIndex ? "down" : "up";
+
+  const linkLabelKeyMap: Record<
+    ProjectLink["label"],
+    "repository" | "liveDemo" | "caseStudy"
+  > = {
+    Repository: "repository",
+    "Live Demo": "liveDemo",
+    "Case Study": "caseStudy",
+  };
 
   if (!selectedProject) return null;
 
@@ -75,7 +86,7 @@ export function Projects() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              {link.label}
+              {t(`projects.links.${linkLabelKeyMap[link.label]}`)}
             </a>
           ))}
         </div>
@@ -84,7 +95,11 @@ export function Projects() {
   );
 
   return (
-    <Section id="projects" title="Projects" className="projects-section">
+    <Section
+      id="projects"
+      title={t("projects.title")}
+      className="projects-section"
+    >
       <div className="projects-list-detail">
         {/* Left: Project List */}
         <div className="projects-list">

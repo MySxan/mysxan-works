@@ -1,0 +1,83 @@
+{
+  "app": {
+    "quickToggles": "Quick toggles",
+    "switchTheme": "Switch to {{mode}} mode",
+    "switchLanguage": "Switch language to {{lang}}"
+  },
+  "mode": {
+    "light": "light",
+    "dark": "dark"
+  },
+  "nav": {
+    "projects": "Projects",
+    "works": "Works",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "intro": {
+    "subtitle": "Developer & Designer"
+  },
+  "hero": {
+    "tagline": "FULL STACK DEVELOPER & CREATIVE CONTENT CREATOR",
+    "intro": "EXPRESS MY UNDERSTANDING OF THE WORLD THROUGH MY WORK",
+    "skills": [
+      { "label": "Full Stack", "sub": "React & TypeScript" },
+      { "label": "UI/UX", "sub": "Interactive Design" },
+      { "label": "Design", "sub": "Logo & Font" },
+      { "label": "GFX & ILLUST.", "sub": "ALBUM & BANNER & POSTER" },
+      { "label": "Composition", "sub": "DnB & Prog. House & ARTCORE" }
+    ]
+  },
+  "info": {
+    "paragraphIntro": "Trying to express my understanding of the world through my works — I create artworks and digital experiences that feel clear, intentional, and alive.",
+    "paragraph": "I care about clean code, performance, and the small details that make an interface effortless to use.<br/>My creative practice spans logo & font design, GFX & illustration, and music composition<br/><i>DnB / Progressive House / Artcore</i><br/>I'm drawn to creation, and I bring that visual sensibility into every system I design and ship."
+  },
+  "projects": {
+    "title": "Projects",
+    "links": {
+      "repository": "Repository",
+      "liveDemo": "Live Demo",
+      "caseStudy": "Case Study"
+    }
+  },
+  "works": {
+    "title": "Works",
+    "view": "View",
+    "viewItem": "View {{title}}",
+    "nav": {
+      "scrollLeft": "Scroll left",
+      "scrollRight": "Scroll right",
+      "goToColumn": "Go to column {{index}}"
+    },
+    "modal": {
+      "viewFullProject": "View Full Project",
+      "type": "Type",
+      "year": "Year"
+    }
+  },
+  "about": {
+    "title": "About Me",
+    "timelineTitle": "Journey"
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "I'm always interested in hearing about new projects and opportunities.",
+    "emailLabel": "Email",
+    "telLabel": "Tel",
+    "connectLabel": "Connect",
+    "copy": "Copy",
+    "copyEmailTitle": "Copy email address",
+    "copyEmailAria": "Copy email to clipboard",
+    "toast": {
+      "copySuccess": "Email copied to clipboard!",
+      "copyError": "Failed to copy email"
+    }
+  },
+  "footer": {
+    "copyright": "© {{year}} MySxan. All rights reserved.",
+    "tagline": "Crafted with React, TypeScript, and creative passion."
+  },
+  "modal": {
+    "close": "Close modal"
+  }
+}

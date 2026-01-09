@@ -1,12 +1,11 @@
 // IntroStage - handles the scroll narrative (Phase A/B)
 import { useEffect, useState, useRef, type ReactNode } from "react";
+import { useTranslation } from "react-i18next";
 import { Hero } from "../home/Hero";
 
 interface IntroStageProps {
   onScrollComplete: (completed: boolean) => void;
   children: ReactNode;
-  lang: "EN" | "ZH";
-  toggleLang: () => void;
 }
 
 // Get Lenis instance from global window
@@ -23,12 +22,9 @@ declare global {
   }
 }
 
-export function IntroStage({
-  onScrollComplete,
-  children,
-  lang,
-  toggleLang,
-}: IntroStageProps) {
+export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
+  const { i18n, t } = useTranslation();
+  const isZh = i18n.language.startsWith("zh");
   const [cover, setCover] = useState(0);
   const [titleTransform, setTitleTransform] = useState(0);
   const [heroIn, setHeroIn] = useState(false);
@@ -223,18 +219,18 @@ export function IntroStage({
           ))}
         </h1>
         <div className="subtitle-row">
-          <p className="site-subtitle">Developer & Designer</p>
+          <p className="site-subtitle">{t("intro.subtitle")}</p>
           <div className="hero-lang-toggle">
             <button
-              className={`hero-lang-btn ${lang === "EN" ? "active" : ""}`}
-              onClick={toggleLang}
+              className={`hero-lang-btn ${!isZh ? "active" : ""}`}
+              onClick={() => i18n.changeLanguage("en")}
             >
               EN
             </button>
             <span className="hero-lang-sep">-</span>
             <button
-              className={`hero-lang-btn ${lang === "ZH" ? "active" : ""}`}
-              onClick={toggleLang}
+              className={`hero-lang-btn ${isZh ? "active" : ""}`}
+              onClick={() => i18n.changeLanguage("zh")}
             >
               ZH
             </button>

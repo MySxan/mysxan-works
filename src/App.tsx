@@ -1,5 +1,6 @@
 // Main App component - single-page personal website with anchor sections
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { Navbar } from "./components/layout/Navbar";
 import { Footer } from "./components/layout/Footer";
 import { IntroStage } from "./components/layout/IntroStage";
@@ -20,8 +21,12 @@ function App() {
 
   // Initialize theme
   const { theme, toggleTheme } = useTheme();
-  const [lang, setLang] = useState<"EN" | "ZH">("EN");
-  const toggleLang = () => setLang((prev) => (prev === "EN" ? "ZH" : "EN"));
+  const { i18n, t } = useTranslation();
+  const isZh = i18n.language.startsWith("zh");
+  const currentLangLabel = isZh ? "ZH" : "EN";
+  const nextLangLabel = isZh ? "EN" : "ZH";
+  const toggleLang = () =>
+    i18n.changeLanguage(isZh ? "en" : "zh");
   const [footerInView, setFooterInView] = useState(false);
 
   // Observe footer visibility to hide toggles when footer is on screen
@@ -48,13 +53,17 @@ function App() {
         className={`toggle-rail ${
           navVisible && !footerInView ? "visible" : ""
         }`}
-        aria-label="Quick toggles"
+        aria-label={t("app.quickToggles")}
       >
         <button
           className="toggle-btn theme-toggle"
           onClick={toggleTheme}
-          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
-          title={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+          aria-label={t("app.switchTheme", {
+            mode: t(`mode.${theme === "light" ? "dark" : "light"}`),
+          })}
+          title={t("app.switchTheme", {
+            mode: t(`mode.${theme === "light" ? "dark" : "light"}`),
+          })}
         >
           {theme === "light" ? <BsMoonFill /> : <BsSunFill />}
         </button>
@@ -62,10 +71,10 @@ function App() {
         <button
           className="toggle-btn lang-toggle"
           onClick={toggleLang}
-          aria-label={`Switch language to ${lang === "EN" ? "ZH" : "EN"}`}
-          title={`Switch language to ${lang === "EN" ? "ZH" : "EN"}`}
+          aria-label={t("app.switchLanguage", { lang: nextLangLabel })}
+          title={t("app.switchLanguage", { lang: nextLangLabel })}
         >
-          {lang}
+          {currentLangLabel}
         </button>
       </div>
 
@@ -79,11 +88,7 @@ function App() {
       </div>
 
       <main>
-        <IntroStage
-          onScrollComplete={setNavVisible}
-          lang={lang}
-          toggleLang={toggleLang}
-        >
+        <IntroStage onScrollComplete={setNavVisible}>
           <Info />
           <Projects />
           <Works />

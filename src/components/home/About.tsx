@@ -1,4 +1,5 @@
 // About section component - personal information, skills, and timeline
+import { useTranslation } from "react-i18next";
 import { Section } from "../ui/Section";
 import { SkillGroup } from "../ui/SkillGroup";
 import { Timeline } from "../ui/Timeline";
@@ -6,8 +7,10 @@ import { skills } from "../../data/skills";
 import { timeline } from "../../data/timeline";
 
 export function About() {
+  const { t } = useTranslation();
+
   return (
-    <Section id="about" title="About Me" className="about-section">
+    <Section id="about" title={t("about.title")} className="about-section">
       {/* Split layout: Bio + Skills */}
       <div className="about-content">
         <div className="about-bio">
@@ -40,7 +43,7 @@ export function About() {
 
       {/* Timeline */}
       <div className="about-timeline">
-        <h3 className="timeline-heading">Journey</h3>
+        <h3 className="timeline-heading">{t("about.timelineTitle")}</h3>
         <Timeline milestones={timeline} />
       </div>
     </Section>

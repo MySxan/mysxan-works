@@ -1,5 +1,6 @@
 // WorkCard component - displays individual work item in grid
 import { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import type { Work } from "../../data/works";
 
 interface WorkCardProps {
@@ -19,6 +20,7 @@ const parallaxConfigs = [
 ];
 
 export function WorkCard({ work, index, onClick }: WorkCardProps) {
+  const { t } = useTranslation();
   const imageRef = useRef<HTMLImageElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -90,7 +92,7 @@ export function WorkCard({ work, index, onClick }: WorkCardProps) {
           onClick();
         }
       }}
-      aria-label={`View ${work.title}`}
+      aria-label={t("works.viewItem", { title: work.title })}
     >
       <div className="work-card-image">
         <img
@@ -100,7 +102,7 @@ export function WorkCard({ work, index, onClick }: WorkCardProps) {
           loading="lazy"
         />
         <div className="work-overlay">
-          <span className="overlay-text">View</span>
+          <span className="overlay-text">{t("works.view")}</span>
         </div>
       </div>
       <div className="work-card-info">

@@ -1,5 +1,6 @@
 // Works section component - showcases work experience and portfolio items
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Section } from "../ui/Section";
 import { WorkCard } from "../ui/WorkCard";
 import { Modal } from "../ui/Modal";
@@ -7,6 +8,7 @@ import type { Work } from "../../data/works";
 import { works } from "../../data/works";
 
 export function Works() {
+  const { t } = useTranslation();
   const [selectedWork, setSelectedWork] = useState<Work | null>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const [activeColumn, setActiveColumn] = useState(0);
@@ -14,12 +16,31 @@ export function Works() {
   const [dotCount, setDotCount] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
-  const getColumnWidth = () => {
-    const gap = 16;
+  const getLayoutMetrics = () => {
     const pageWidth = window.innerWidth;
-    const cardWidth = pageWidth / 5 - (gap * 4) / 5;
-    return cardWidth + gap;
+    let gap = 16;
+    let cardWidth = pageWidth / 5 - (gap * 4) / 5;
+
+    if (pageWidth <= 900) {
+      const columns = 3;
+      cardWidth = pageWidth / columns - (gap * (columns - 1)) / columns;
+    }
+
+    if (pageWidth <= 768) {
+      gap = 14;
+      cardWidth = Math.min(420, Math.round(pageWidth * 0.82));
+    }
+
+    if (pageWidth <= 640) {
+      gap = 12;
+      cardWidth = Math.min(380, Math.round(pageWidth * 0.86));
+    }
+
+    cardWidth = Math.max(220, cardWidth);
+    return { gap, cardWidth, columnWidth: cardWidth + gap };
   };
+
+  const getColumnWidth = () => getLayoutMetrics().columnWidth;
 
   const getMaxDotIndex = () => (dotCount > 0 ? dotCount - 1 : 0);
 
@@ -31,11 +52,7 @@ export function Works() {
       const items = Array.from(grid.children).filter(
         (child) => !child.classList.contains("works-spacer")
       ) as HTMLElement[];
-      const gap = 16; // var(--space-2) = 2rem = 32px (same as container padding)
-
-      // Get container width to calculate card width (1/5 of viewport)
-      const pageWidth = window.innerWidth;
-      const cardWidth = pageWidth / 5 - (gap * 4) / 5; // Account for gaps
+      const { gap, cardWidth, columnWidth } = getLayoutMetrics();
 
       const cardsPerColumn = 2; // Max 2 cards per column
       const numColumns = Math.ceil(items.length / cardsPerColumn);
@@ -48,7 +65,7 @@ export function Works() {
         // Position item
         item.style.position = "absolute";
         item.style.width = `${cardWidth}px`;
-        item.style.left = `${columnIndex * (cardWidth + gap)}px`;
+        item.style.left = `${columnIndex * columnWidth}px`;
         item.style.top = `${
           (index % cardsPerColumn) *
           (columnHeights[columnIndex] > 0 ? columnHeights[columnIndex] : 0)
@@ -70,7 +87,6 @@ export function Works() {
       grid.style.height = `${maxHeight}px`;
 
       // Compute scrolling metrics - dynamically calculate visible columns
-      const columnWidth = getColumnWidth();
       const visibleWidth = grid.clientWidth;
       // Calculate how many columns can actually fit in the visible width
       const computedVisibleColumns = Math.max(
@@ -237,7 +253,7 @@ export function Works() {
       <Section id="works" title="" className="works-section">
         {/* Main layout with vertical title and grid */}
         <div className="works-layout">
-          <h2 className="works-title-vertical">Works</h2>
+          <h2 className="works-title-vertical">{t("works.title")}</h2>
 
           <div className="works-container">
             <div className="works-grid-wrapper">
@@ -278,7 +294,7 @@ export function Works() {
           <button
             className="works-nav-btn works-nav-btn-left"
             onClick={handleScrollLeft}
-            aria-label="Scroll left"
+            aria-label={t("works.nav.scrollLeft")}
           />
           <div className="works-nav-dots">
             {Array.from({ length: dotCount }).map((_, i) => (
@@ -288,14 +304,14 @@ export function Works() {
                   i === activeColumn ? "active" : ""
                 }`}
                 onClick={() => handleDotClick(i)}
-                aria-label={`Go to column ${i + 1}`}
+                aria-label={t("works.nav.goToColumn", { index: i + 1 })}
               />
             ))}
           </div>
           <button
             className="works-nav-btn works-nav-btn-right"
             onClick={handleScrollRight}
-            aria-label="Scroll right"
+            aria-label={t("works.nav.scrollRight")}
           />
         </div>
       </Section>
@@ -307,7 +323,7 @@ export function Works() {
           title={selectedWork.title}
           externalLink={{
             url: selectedWork.url,
-            label: "View Full Project",
+            label: t("works.modal.viewFullProject"),
           }}
         >
           <img
@@ -317,10 +333,10 @@ export function Works() {
           />
           <div className="modal-details">
             <p>
-              <strong>Type:</strong> {selectedWork.type}
+              <strong>{t("works.modal.type")}:</strong> {selectedWork.type}
             </p>
             <p>
-              <strong>Year:</strong> {selectedWork.year}
+              <strong>{t("works.modal.year")}:</strong> {selectedWork.year}
             </p>
           </div>
         </Modal>

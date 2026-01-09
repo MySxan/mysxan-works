@@ -1,4 +1,5 @@
 // Footer component - page footer with copyright, tagline, and social links
+import { useTranslation } from "react-i18next";
 import { Container } from "../ui/Container";
 import { links } from "../../data/links";
 import { FaGithub, FaLinkedin, FaTwitter, FaSpotify } from "react-icons/fa";
@@ -6,6 +7,7 @@ import { SiPixiv, SiBilibili, SiBandcamp } from "react-icons/si";
 import type { IconType } from "react-icons";
 
 export function Footer() {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   const ICONS: Record<string, IconType> = {
@@ -24,10 +26,10 @@ export function Footer() {
         <div className="footer-content">
           <div className="footer-info">
             <p className="footer-copyright">
-              &copy; {currentYear} MySxan. All rights reserved.
+              {t("footer.copyright", { year: currentYear })}
             </p>
             <p className="footer-tagline">
-              Crafted with React, TypeScript, and creative passion.
+              {t("footer.tagline")}
             </p>
           </div>
 

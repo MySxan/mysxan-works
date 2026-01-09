@@ -346,7 +346,8 @@ main {
   margin-bottom: var(--space-3);
   text-transform: uppercase;
   letter-spacing: -0.04em;
-  line-height: var(--line-height-tight);
+  line-height: 1.1;
+  padding-block: 0.08em;
   overflow: hidden;
 }
 
@@ -783,7 +784,7 @@ a:hover {
 .works-title-vertical {
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  transform: rotate(180deg);
+  transform: none;
   font-size: var(--text-3xl);
   font-weight: 700;
   margin: 0;

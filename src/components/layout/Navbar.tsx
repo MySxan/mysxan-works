@@ -1,11 +1,13 @@
 // Navbar component - responsive navigation with smooth scroll and active section highlighting
 import { useState, useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 
 interface NavbarProps {
   className?: string;
 }
 
 export function Navbar({ className = "" }: NavbarProps) {
+  const { t } = useTranslation();
   const [activeSection, setActiveSection] = useState("hero");
   const [indicatorX, setIndicatorX] = useState(0);
   const [indicatorW, setIndicatorW] = useState(0);
@@ -80,10 +82,10 @@ export function Navbar({ className = "" }: NavbarProps) {
   }, [activeSection]);
 
   const navLinks = [
-    { href: "#projects", label: "Projects" },
-    { href: "#works", label: "Works" },
-    { href: "#about", label: "About" },
-    { href: "#contact", label: "Contact" },
+    { href: "#projects", label: t("nav.projects") },
+    { href: "#works", label: t("nav.works") },
+    { href: "#about", label: t("nav.about") },
+    { href: "#contact", label: t("nav.contact") },
   ];
 
   return (

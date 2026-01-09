@@ -1,14 +1,13 @@
 // Hero section component - main landing section with introduction
+import { useTranslation } from "react-i18next";
 import { Container } from "../ui/Container";
 
 export function Hero() {
-  const skills = [
-    "Full Stack",
-    "UI/UX",
-    "Design",
-    "GFX & ILLUST.",
-    "Composition",
-  ];
+  const { t } = useTranslation();
+  const skills = t("hero.skills", { returnObjects: true }) as Array<{
+    label: string;
+    sub?: string;
+  }>;
 
   return (
     <section id="hero" className="hero">
@@ -16,39 +15,23 @@ export function Hero() {
         <div className="hero-overlay-grid">
           <div className="hero-left">
             <img src="/img/logo.png" alt="Logo" className="hero-logo" />
-            <p className="hero-tagline">
-              FULL STACK DEVELOPER & CREATIVE CONTENT CREATOR
-            </p>
-            <p className="hero-intro">
-              EXPRESS MY UNDERSTANDING OF THE WORLD THROUGH MY WORK
-            </p>
+            <p className="hero-tagline">{t("hero.tagline")}</p>
+            <p className="hero-intro">{t("hero.intro")}</p>
           </div>
 
           <div className="hero-right">
             <ul className="hero-skill-list">
               {skills.map((skill, idx) => (
                 <li
-                  key={skill}
+                  key={`${skill.label}-${idx}`}
                   style={
                     { "--delay": `${0.3 + idx * 0.05}s` } as React.CSSProperties
                   }
                 >
-                  <span className="skill-label">{skill.toUpperCase()}</span>
-                  {idx === 0 && (
-                    <span className="skill-sub">REACT & TYPESCRIPT</span>
-                  )}
-                  {idx === 1 && (
-                    <span className="skill-sub">Interactive Design</span>
-                  )}
-                  {idx === 2 && <span className="skill-sub">Logo & Font</span>}
-                  {idx === 4 && (
-                    <span className="skill-sub">
-                      DnB & Prog. House & ARTCORE
-                    </span>
-                  )}
-                  {idx === 3 && (
-                    <span className="skill-sub">ALBUM & BANNER & POSTER</span>
-                  )}
+                  <span className="skill-label">
+                    {skill.label.toUpperCase()}
+                  </span>
+                  {skill.sub && <span className="skill-sub">{skill.sub}</span>}
                 </li>
               ))}
             </ul>
