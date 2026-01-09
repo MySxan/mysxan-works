@@ -1,18 +1,11 @@
 // Hero section component - main landing section with introduction
 import { Container } from "../ui/Container";
 
-interface HeroProps {
-  lang: "EN" | "ZH";
-  toggleLang: () => void;
-}
-
-export function Hero(_props: HeroProps) {
-  // Props passed for future i18n, currently unused
+export function Hero() {
   const skills = [
     "Full Stack",
     "UI/UX",
     "Design",
-
     "GFX & ILLUST.",
     "Composition",
   ];
@@ -22,7 +15,7 @@ export function Hero(_props: HeroProps) {
       <Container>
         <div className="hero-overlay-grid">
           <div className="hero-left">
-            <img src="/logo 1.png" alt="Logo" className="hero-logo" />
+            <img src="/img/logo.png" alt="Logo" className="hero-logo" />
             <p className="hero-tagline">
               FULL STACK DEVELOPER & CREATIVE CONTENT CREATOR
             </p>

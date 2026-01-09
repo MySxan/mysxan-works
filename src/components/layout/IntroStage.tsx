@@ -245,7 +245,7 @@ export function IntroStage({
       {/* Hero Section - absolute positioned at top */}
       <div className="intro-hero-section">
         <div className="hero-overlay">
-          <Hero lang={lang} toggleLang={toggleLang} />
+          <Hero />
         </div>
       </div>
 
