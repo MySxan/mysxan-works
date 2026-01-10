@@ -84,7 +84,11 @@ export function Navbar({ className = "" }: NavbarProps) {
 
     const updateMenuIndicator = () => {
       const list = menuLinksRef.current;
-      if (!list) return;
+      const panel = menuPanelRef.current;
+      if (!list || !panel || !menuOpen) {
+        setMenuIndicatorVisible(false);
+        return;
+      }
       const active = list.querySelector("a.active") as HTMLAnchorElement | null;
       if (!active) {
         setMenuIndicatorVisible(false);
@@ -92,8 +96,7 @@ export function Navbar({ className = "" }: NavbarProps) {
       }
       setMenuIndicatorVisible(true);
       const rect = active.getBoundingClientRect();
-      const panelRect = menuPanelRef.current?.getBoundingClientRect();
-      if (!panelRect) return;
+      const panelRect = panel.getBoundingClientRect();
       const y = rect.top - panelRect.top;
       const h = rect.height;
       setMenuIndicatorY(y);
@@ -113,7 +116,7 @@ export function Navbar({ className = "" }: NavbarProps) {
       cancelAnimationFrame(raf);
       window.removeEventListener("resize", handleResize);
     };
-  }, [activeSection, i18n.language]);
+  }, [activeSection, i18n.language, menuOpen]);
 
   useEffect(() => {
     const handleResize = () => {

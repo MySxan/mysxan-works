@@ -2,13 +2,8 @@
 import { useTranslation } from "react-i18next";
 import { Container } from "../ui/Container";
 import { links } from "../../data/links";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaSpotify,
-  FaQq,
-} from "react-icons/fa";
-import { SiX } from "react-icons/si";
+import { FaGithub, FaLinkedin, FaSpotify, FaQq } from "react-icons/fa";
+import { SiX, SiXiaohongshu } from "react-icons/si";
 import { SiPixiv, SiBilibili, SiBandcamp } from "react-icons/si";
 import { RiNeteaseCloudMusicLine } from "react-icons/ri";
 import type { IconType } from "react-icons";
@@ -27,7 +22,9 @@ export function Footer() {
     spotify: FaSpotify,
     qq: FaQq,
     netease: RiNeteaseCloudMusicLine,
+    xiaohongshu: SiXiaohongshu,
   };
+  const mihuashiLogo = `${import.meta.env.BASE_URL}icons/mhs.svg`;
 
   return (
     <footer className="footer">
@@ -55,7 +52,16 @@ export function Footer() {
                   aria-label={link.label}
                   title={link.label}
                 >
-                  <Icon className="footer-icon" aria-hidden="true" />
+                  {link.icon === "mihuashi" ? (
+                    <img
+                      src={mihuashiLogo}
+                      alt=""
+                      className="footer-icon footer-icon-image"
+                      aria-hidden="true"
+                    />
+                  ) : (
+                    <Icon className="footer-icon" aria-hidden="true" />
+                  )}
                 </a>
               );
             })}

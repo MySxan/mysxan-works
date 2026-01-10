@@ -62,4 +62,16 @@ export const links: Link[] = [
     url: "https://music.163.com/#/artist?id=51616966",
     icon: "netease",
   },
+  {
+    id: 10,
+    label: "Xiaohongshu",
+    url: "https://xhslink.com/m/9Xnxg6gxnOZ",
+    icon: "xiaohongshu",
+  },
+  {
+    id: 11,
+    label: "Mihuashi",
+    url: "https://www.mihuashi.com/profiles/2071302",
+    icon: "mihuashi",
+  },
 ];

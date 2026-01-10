@@ -3,11 +3,26 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MySxan — Full-Stack Developer & Creative Content Creator</title>
     <meta
       name="description"
-      content="MYSXAN - Full Stack Developer & Creative Content Creator. Explore my portfolio and digital works."
+      content="MySxan - Full-stack developer & creative content creator. Portfolio, projects, music and artworks."
     />
     <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://mysxan.com/" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="MySxan" />
+    <meta property="og:title" content="MySxan" />
+    <meta
+      property="og:description"
+      content="Portfolio, projects, music and artworks."
+    />
+    <meta property="og:url" content="https://mysxan.com/" />
+    <meta property="og:image" content="https://mysxan.com/og-image.png" />
 
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
@@ -20,13 +35,63 @@
     <link rel="apple-touch-icon" href="/icons/icon-192.png" />
     <link rel="manifest" href="/manifest.json" />
 
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://mysxan.com/#person",
+            "name": "MySxan",
+            "alternateName": ["mysxan", "MYSXAN"],
+            "url": "https://mysxan.com/",
+            "sameAs": [
+              "https://github.com/MySxan",
+              "https://www.linkedin.com/in/mysxan/",
+              "https://x.com/rts_ms",
+              "https://www.pixiv.net/users/53849788",
+              "https://space.bilibili.com/455404393",
+              "https://mysxan.bandcamp.com/",
+              "https://open.spotify.com/artist/0kLse57Pg4W5UN5SeGeZxB",
+              "https://music.163.com/artist?id=51616966"
+              "https://xhslink.com/m/9Xnxg6gxnOZ"
+              "https://www.mihuashi.com/profiles/2071302"
+            ]
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://mysxan.com/#website",
+            "name": "MySxan",
+            "url": "https://mysxan.com/",
+            "publisher": {
+              "@id": "https://mysxan.com/#person"
+            },
+            "inLanguage": ["en", "zh"]
+          },
+          {
+            "@type": "WebPage",
+            "@id": "https://mysxan.com/#webpage",
+            "url": "https://mysxan.com/",
+            "name": "MySxan",
+            "isPartOf": { "@id": "https://mysxan.com/#website" },
+            "about": { "@id": "https://mysxan.com/#person" },
+            "primaryImageOfPage": { "@id": "https://mysxan.com/#ogimage" }
+          },
+          {
+            "@type": "ImageObject",
+            "@id": "https://mysxan.com/#ogimage",
+            "url": "https://mysxan.com/og-image.png"
+          }
+        ]
+      }
+    </script>
+
     <!-- Google Fonts -->
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-
-    <title>MYSXAN</title>
   </head>
   <body>
     <div id="root"></div>

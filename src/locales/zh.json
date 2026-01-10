@@ -1,4 +1,4 @@
-{
+﻿{
   "app": {
     "quickToggles": "快捷切换",
     "switchTheme": "切换到{{mode}}模式",
@@ -19,7 +19,7 @@
   },
   "hero": {
     "tagline": "全栈开发 & 创作者",
-    "intro": "用自己的方式理解这个世界",
+    "intro": "用自己的方式理解世界",
     "skills": [
       { "label": "全栈", "sub": "React & TypeScript" },
       { "label": "UI/UX", "sub": "交互设计" },
@@ -37,7 +37,9 @@
     "links": {
       "repository": "代码仓库",
       "liveDemo": "在线演示",
-      "caseStudy": "案例研究"
+      "caseStudy": "案例研究",
+      "website": "官方网站",
+      "tapTap": "TapTap"
     }
   },
   "works": {
@@ -57,7 +59,12 @@
   },
   "about": {
     "title": "关于",
-    "timelineTitle": "历程"
+    "timelineTitle": "历程",
+    "paragraphs": [
+      "我在 Web、设计与音乐之间工作，追求简洁、快速且有意图的体验。",
+      "关注清晰的结构、克制的动效，以及真正服务创作流程的工具。",
+      "不写代码时，我在制作音乐与视觉研究，为新的作品做准备。"
+    ]
   },
   "contact": {
     "title": "联系",
@@ -65,6 +72,19 @@
     "emailLabel": "邮箱",
     "telLabel": "电话",
     "connectLabel": "社交",
+    "social": {
+      "qq": "QQ",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "x": "X",
+      "pixiv": "Pixiv",
+      "bilibili": "Bilibili",
+      "bandcamp": "Bandcamp",
+      "spotify": "Spotify",
+      "netease": "网易云音乐",
+      "xiaohongshu": "小红书",
+      "mihuashi": "米画师"
+    },
     "copyEmailTitle": "复制邮箱地址",
     "copyEmailAria": "复制邮箱到剪贴板",
     "copyTelTitle": "复制手机号",

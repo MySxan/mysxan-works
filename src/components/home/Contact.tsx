@@ -21,6 +21,19 @@ export function Contact() {
     { value: "+1 217 637 3373", label: "US" },
     { value: "+86 180 8648 4696", label: "CN" },
   ];
+  const socialLabelKeyMap: Record<string, string> = {
+    qq: "qq",
+    github: "github",
+    linkedin: "linkedin",
+    twitter: "x",
+    pixiv: "pixiv",
+    bilibili: "bilibili",
+    bandcamp: "bandcamp",
+    spotify: "spotify",
+    netease: "netease",
+    xiaohongshu: "xiaohongshu",
+    mihuashi: "mihuashi",
+  };
 
   const handleCopy = async (value: string) => {
     try {
@@ -61,19 +74,25 @@ export function Contact() {
                   {t("contact.connectLabel")}
                 </p>
                 <div className="contact-social-links">
-                  {links.map((link) => (
-                    <a
-                      key={link.id}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="contact-social-link"
-                      aria-label={link.label}
-                      title={link.label}
-                    >
-                      {link.label}
-                    </a>
-                  ))}
+                  {links.map((link) => {
+                    const labelKey = socialLabelKeyMap[link.icon];
+                    const label = labelKey
+                      ? t(`contact.social.${labelKey}`, link.label)
+                      : link.label;
+                    return (
+                      <a
+                        key={link.id}
+                        href={link.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="contact-social-link"
+                        aria-label={label}
+                        title={label}
+                      >
+                        {label}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             </div>

@@ -13,7 +13,7 @@ export function Info() {
           <p className="info-paragraph">
             <Trans
               i18nKey="info.paragraph"
-              components={{ br: <br />, i: <i /> }}
+              components={{ br: <br key="br" />, i: <i key="i" /> }}
             />
           </p>
         </div>

@@ -37,7 +37,9 @@
     "links": {
       "repository": "Repository",
       "liveDemo": "Live Demo",
-      "caseStudy": "Case Study"
+      "caseStudy": "Case Study",
+      "website": "Website",
+      "tapTap": "TapTap"
     }
   },
   "works": {
@@ -57,7 +59,12 @@
   },
   "about": {
     "title": "About Me",
-    "timelineTitle": "Journey"
+    "timelineTitle": "Journey",
+    "paragraphs": [
+      "I work across web, design, and music to build focused, minimal experiences.",
+      "I care about clear structure, tactile motion, and tools that stay out of the way.",
+      "When I am not coding, I am producing music and exploring visual studies."
+    ]
   },
   "contact": {
     "title": "Contact",
@@ -65,6 +72,19 @@
     "emailLabel": "Email",
     "telLabel": "Tel",
     "connectLabel": "Connect",
+    "social": {
+      "qq": "QQ",
+      "github": "GitHub",
+      "linkedin": "LinkedIn",
+      "x": "X",
+      "pixiv": "Pixiv",
+      "bilibili": "Bilibili",
+      "bandcamp": "Bandcamp",
+      "spotify": "Spotify",
+      "netease": "NetEase Music",
+      "xiaohongshu": "Xiaohongshu",
+      "mihuashi": "Mihuashi"
+    },
     "copyEmailTitle": "Copy email address",
     "copyEmailAria": "Copy email to clipboard",
     "copyTelTitle": "Copy phone number",

@@ -27,6 +27,7 @@ export function Projects() {
   const currentIndex = showcaseProjects.findIndex((p) => p.id === selectedId);
 
   const handleSelectProject = (id: string) => {
+    if (id === selectedId) return;
     setPrevIndex(currentIndex);
     setPrevId(selectedId);
     setSelectedId(id);
@@ -36,11 +37,13 @@ export function Projects() {
 
   const linkLabelKeyMap: Record<
     ProjectLink["label"],
-    "repository" | "liveDemo" | "caseStudy"
+    "repository" | "liveDemo" | "caseStudy" | "website" | "tapTap"
   > = {
     Repository: "repository",
     "Live Demo": "liveDemo",
     "Case Study": "caseStudy",
+    Website: "website",
+    TapTap: "tapTap",
   };
 
   useEffect(() => {

@@ -243,7 +243,22 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
           ))}
         </h1>
         <div className="subtitle-row">
-          <p className="site-subtitle">{t("intro.subtitle")}</p>
+          <p className="site-subtitle">
+            {t("intro.subtitle")
+              .split("/")
+              .map((part) => part.trim())
+              .filter(Boolean)
+              .map((part, index, items) => (
+                <span className="subtitle-word" key={`${part}-${index}`}>
+                  {part}
+                  {index < items.length - 1 && (
+                    <span className="subtitle-sep" aria-hidden="true">
+                      /
+                    </span>
+                  )}
+                </span>
+              ))}
+          </p>
           <div className="hero-lang-toggle">
             <button
               className={`hero-lang-btn ${!isZh ? "active" : ""}`}
@@ -280,6 +295,10 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
 
       {/* Content Section - normal flow */}
       <div ref={contentRef} className="intro-content">
+        <div className="seo-intro">
+          <h1 className="seo-title">MySxan</h1>
+          <p className="seo-subtitle">Full-Stack Developer &amp; Music Producer</p>
+        </div>
         {children}
       </div>
     </div>

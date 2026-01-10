@@ -2,7 +2,7 @@
 export type ProjectLinkVariant = "primary" | "secondary" | "ghost";
 
 export interface ProjectLink {
-  label: "Live Demo" | "Repository" | "Case Study";
+  label: "Live Demo" | "Repository" | "Case Study" | "Website" | "TapTap";
   href: string;
   variant?: ProjectLinkVariant;
 }
@@ -23,18 +23,26 @@ export const showcaseProjects: ShowcaseProject[] = [
   {
     id: "phigrim",
     title: "Phigrim",
-    year: "2025",
+    year: "2023",
     oneLiner:
-      "Community rhythm game with chart upload/browse + in-game downloader.",
+      "Mobile community rhythm game with in-game chart discovery, download, and installation.",
     highlights: [
       "Designed end-to-end UX for chart discovery and installation",
       "Built modular chart pipeline and metadata validation",
       "Optimized scroll + asset loading for smooth mobile performance",
     ],
-    tags: ["React", "TypeScript", "Node.js", "RAG", "Design System"],
+    tags: ["Unity", "MasterGo", "UI/UX", "Design System"],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Website",
+        href: "https://www.phigrim.cn/en/",
+        variant: "primary",
+      },
+      {
+        label: "TapTap",
+        href: "https://www.taptap.cn/app/241790",
+        variant: "secondary",
+      },
     ],
   },
   {
@@ -42,84 +50,116 @@ export const showcaseProjects: ShowcaseProject[] = [
     title: "ArxsBot",
     year: "2025",
     oneLiner:
-      "Modular QQ bot with adapters/plugins + storage-ready architecture.",
+      "A TypeScript multiplatform chat bot project using pnpm + Vitest.",
     highlights: [
-      "Adapter-first design",
-      "Plugin framework",
-      "Policy/risk module",
+      "TypeScript codebase with separated config/, src/, and tests/ structure",
+      "pnpm workspace setup for multi-package / modular growth",
+      "Test-ready setup via Vitest config",
     ],
-    tags: ["TypeScript", "NapCat", "Monorepo"],
+    tags: ["TypeScript", "pnpm", "Vitest", "Node.js", "Monorepo"],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Repository",
+        href: "https://github.com/MySxan/ArxsBot",
+        variant: "primary",
+      },
     ],
   },
   {
     id: "wordle-helper",
-    title: "wordle-helper",
-    year: "2024",
+    title: "Wordle Helper",
+    year: "2025",
     oneLiner:
-      "Comprehensive component library with 50+ reusable UI components and design tokens.",
+      "React-based Wordle helper that filters candidates based on guess feedback.",
     highlights: [
-      "Built Storybook documentation with live previews",
-      "Implemented theming system with light/dark modes",
-      "Created accessibility guidelines and WCAG compliance standards",
+      "Real-time input with backspace editing for guesses",
+      "Color-coded feedback (green/yellow/gray) to refine results",
+      "Filters possible words and shows a definition when one remains",
     ],
-    tags: ["React", "TypeScript", "Storybook", "CSS-in-JS", "A11y"],
+    tags: ["React", "JavaScript", "Vite", "Tailwind CSS", "Wordle"],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Repository",
+        href: "https://github.com/MySxan/wordle-helper",
+        variant: "primary",
+      },
+      {
+        label: "Live Demo",
+        href: "https://mysxan.com/wordle-helper/",
+        variant: "secondary",
+      },
     ],
   },
   {
     id: "course-scheduler",
-    title: "course-scheduler",
-    year: "2024",
+    title: "Course Scheduler",
+    year: "2025",
     oneLiner:
-      "Interactive dashboard for tracking application metrics and user behavior patterns.",
+      "Web-based course scheduling app for building and exporting weekly timetables.",
     highlights: [
-      "Real-time data sync with WebSocket connections",
-      "Advanced chart visualizations with D3.js",
-      "Custom filtering and drill-down capabilities",
+      "Visual weekly timetable with configurable time ranges",
+      "CSV import for bulk course setup",
+      "Export schedules as PNG images",
     ],
-    tags: ["React", "Node.js", "D3.js", "WebSocket", "PostgreSQL"],
+    tags: ["React", "TypeScript", "Vite", "Tailwind CSS", "Papaparse"],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Repository",
+        href: "https://github.com/MySxan/course-scheduler",
+        variant: "primary",
+      },
     ],
   },
   {
     id: "uniscraper",
-    title: "uniscraper",
-    year: "2024",
+    title: "UniScraper",
+    year: "2025",
     oneLiner:
-      "Native iOS and Android application for task management and team collaboration.",
+      "Multi-source university ranking scraper + merger that deduplicates and outputs unified CSV datasets.",
     highlights: [
-      "Built with React Native for code sharing",
-      "Offline-first architecture with local sync",
-      "Push notifications and real-time updates",
+      "Scrapes QS, THE, and US News rankings",
+      "Unified merge script with dedup rules to avoid false merges",
+      "Produces merged CSV outputs and logs for traceability",
     ],
-    tags: ["React Native", "TypeScript", "Firebase", "Redux", "Expo"],
+    tags: [
+      "Python",
+      "Selenium",
+      "Pandas",
+      "KaggleHub",
+      "Web Scraping",
+      "Data Merge",
+    ],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Repository",
+        href: "https://github.com/MySxan/uniscraper",
+        variant: "primary",
+      },
     ],
   },
   {
     id: "ai-translator-extension",
-    title: "ai-translator-extension",
-    year: "2023",
+    title: "AI Translator Extension",
+    year: "2025",
     oneLiner:
-      "API-first content management system with flexible content modeling and multi-language support.",
+      "Chrome extension for AI-powered translation.",
     highlights: [
-      "GraphQL API for flexible content querying",
-      "Webhook-based publishing pipeline",
-      "Role-based access control and audit logs",
+      "Background service worker handles translate requests via messaging",
+      "Popup UI for quick interaction and a dedicated settings page",
+      "Standard Chrome extension packaging via manifest.json",
     ],
-    tags: ["Node.js", "GraphQL", "MongoDB", "TypeScript", "Docker"],
+    tags: [
+      "JavaScript",
+      "Chrome Extension",
+      "Manifest V3",
+      "API Integration",
+    ],
     links: [
-      { label: "Repository", href: "#", variant: "primary" },
-      { label: "Live Demo", href: "#", variant: "secondary" },
+      {
+        label: "Repository",
+        href: "https://github.com/MySxan/ai-translator-extension",
+        variant: "primary",
+      },
     ],
   },
 ];
