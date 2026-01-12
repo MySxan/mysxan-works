@@ -71,6 +71,27 @@ await page.waitForFunction(
 );
 await page.waitForTimeout(800);
 
+await page.evaluate(() => {
+  document.documentElement.classList.remove(
+    "boot-loader-skip",
+    "boot-loading",
+    "page-enter",
+    "lang-change",
+  );
+  let bootLoader = document.getElementById("boot-loader");
+  if (!bootLoader) {
+    bootLoader = document.createElement("div");
+    bootLoader.id = "boot-loader";
+    bootLoader.setAttribute("aria-hidden", "true");
+    const logo = document.createElement("div");
+    logo.className = "boot-logo";
+    logo.textContent = "MYSXAN";
+    bootLoader.appendChild(logo);
+    document.body.insertBefore(bootLoader, document.body.firstChild);
+  }
+  bootLoader.classList.remove("boot-loader--hide");
+});
+
 const html = await page.evaluate(() => {
   const doc = document.documentElement;
   return doc ? "<!doctype html>\n" + doc.outerHTML : "";
