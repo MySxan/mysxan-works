@@ -56,12 +56,18 @@
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: none;
+  pointer-events: auto;
+}
+
+.intro-stage.boot-ready .hero-overlay {
   opacity: var(--hero-opacity, 1);
   transform: translateY(var(--hero-translateY, 0));
   transition:
     opacity 0.6s cubic-bezier(0.19, 1, 0.22, 1),
     transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-  pointer-events: auto;
 }
 
 .hero-overlay .hero {

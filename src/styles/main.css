@@ -1297,7 +1297,7 @@ html[lang="zh"] .works-layout {
 
 .about-bio p {
   margin-bottom: var(--space-3);
-  line-height: var(--line-height-relaxed);
+  line-height: 1.5;
   font-size: var(--text-base);
   color: var(--color-text-muted);
 }
@@ -1347,7 +1347,7 @@ html[lang="zh"] .works-layout {
 
 .skill-description {
   margin: 0 0 var(--space-2);
-  font-size: var(--text-sm);
+  font-size: var(--text-base);
   color: var(--color-text-muted);
   line-height: var(--line-height-relaxed);
 }
@@ -2785,6 +2785,19 @@ html[lang="zh"] .works-layout {
   animation: pageTextIn 800ms var(--ease-smooth) forwards;
   animation-delay: var(--enter-delay, 0s);
   will-change: transform, opacity;
+}
+
+.boot-loading .navbar :is(a, button),
+.boot-loading main :is(h1, h2, h3, p, li, a, button:not(.orbit-node)),
+.boot-loading footer :is(p, a) {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.boot-loading .hero-logo,
+.boot-loading .hero-skill-list li {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
 .lang-change .navbar :is(a, button),

@@ -23,6 +23,16 @@
     />
     <meta property="og:url" content="https://mysxan.com/" />
     <meta property="og:image" content="https://mysxan.com/og-image.png" />
+    <meta property="og:image:alt" content="MySxan portfolio preview" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="MySxan" />
+    <meta
+      name="twitter:description"
+      content="Portfolio, projects, music and artworks."
+    />
+    <meta name="twitter:image" content="https://mysxan.com/og-image.png" />
 
     <!-- Favicon and Icons -->
     <link rel="icon" type="image/x-icon" href="/icons/favicon.ico?v=1" />
@@ -148,8 +158,36 @@
   </head>
   <body>
     <script>
-      if (window.sessionStorage.getItem("boot-loader-shown") === "true") {
-        document.documentElement.classList.add("boot-loader-skip");
+      const root = document.documentElement;
+      const isPrerender =
+        typeof navigator !== "undefined" &&
+        navigator.userAgent &&
+        (navigator.userAgent.includes("ReactSnap") ||
+          navigator.userAgent.includes("Prerender"));
+      if (isPrerender) {
+        root.classList.add("boot-loader-skip");
+      } else if (
+        window.sessionStorage.getItem("boot-loader-shown") === "true"
+      ) {
+        root.classList.add("boot-loader-skip");
+      } else {
+        root.classList.add("boot-loading");
+      }
+      if (root.classList.contains("boot-loading")) {
+        const fallback = window.setTimeout(() => {
+          root.classList.remove("boot-loading");
+          const bootLoader = document.getElementById("boot-loader");
+          if (bootLoader) {
+            bootLoader.classList.add("boot-loader--hide");
+          }
+        }, 2200);
+        window.addEventListener(
+          "bootloader:done",
+          () => {
+            window.clearTimeout(fallback);
+          },
+          { once: true },
+        );
       }
     </script>
     <div id="boot-loader" aria-hidden="true">

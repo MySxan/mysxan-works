@@ -3,7 +3,8 @@ import { initReactI18next } from "react-i18next";
 import en from "../locales/en.json";
 import zh from "../locales/zh.json";
 
-const storedLang = localStorage.getItem("lang");
+const isBrowser = typeof window !== "undefined";
+const storedLang = isBrowser ? localStorage.getItem("lang") : null;
 
 i18n.use(initReactI18next).init({
   resources: {
@@ -17,8 +18,10 @@ i18n.use(initReactI18next).init({
   },
 });
 
-i18n.on("languageChanged", (lang) => {
-  localStorage.setItem("lang", lang);
-});
+if (isBrowser) {
+  i18n.on("languageChanged", (lang) => {
+    localStorage.setItem("lang", lang);
+  });
+}
 
 export default i18n;

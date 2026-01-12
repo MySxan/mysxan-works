@@ -23,7 +23,7 @@ export function About() {
             <p key={`${index}-${paragraph.slice(0, 16)}`}>
               <Trans
                 i18nKey={`about.paragraphs.${index}`}
-                components={{ strong: <strong /> }}
+                components={{ strong: <strong key="strong" /> }}
               />
             </p>
           ))}

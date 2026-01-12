@@ -61,13 +61,27 @@ function App() {
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.add("page-enter");
-    const timer = window.setTimeout(() => {
-      document.documentElement.classList.remove("page-enter");
-    }, 1200);
+    const root = document.documentElement;
+    let timer: number | null = null;
+    const runEnter = () => {
+      root.classList.remove("boot-loading");
+      root.classList.add("page-enter");
+      timer = window.setTimeout(() => {
+        root.classList.remove("page-enter");
+      }, 1200);
+    };
+    const bootLoader = document.getElementById("boot-loader");
+    if (!bootLoader || root.classList.contains("boot-loader-skip")) {
+      runEnter();
+    } else {
+      window.addEventListener("bootloader:done", runEnter, { once: true });
+    }
     return () => {
-      window.clearTimeout(timer);
-      document.documentElement.classList.remove("page-enter");
+      if (timer) {
+        window.clearTimeout(timer);
+      }
+      root.classList.remove("page-enter");
+      window.removeEventListener("bootloader:done", runEnter);
     };
   }, []);
 

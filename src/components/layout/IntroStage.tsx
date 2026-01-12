@@ -29,6 +29,12 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
   const [cover, setCover] = useState(0);
   const [titleTransform, setTitleTransform] = useState(0);
   const [heroIn, setHeroIn] = useState(false);
+  const [bootReady, setBootReady] = useState(() => {
+    if (typeof document === "undefined") return false;
+    const root = document.documentElement;
+    const bootLoader = document.getElementById("boot-loader");
+    return !bootLoader || root.classList.contains("boot-loader-skip");
+  });
   const stageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const isLockedAtTop = useRef(false);
@@ -44,6 +50,15 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
     //   window.scrollTo(0, 0);
     // });
   }, []);
+
+  useEffect(() => {
+    if (bootReady) return;
+    const handleBootDone = () => setBootReady(true);
+    window.addEventListener("bootloader:done", handleBootDone, { once: true });
+    return () => {
+      window.removeEventListener("bootloader:done", handleBootDone);
+    };
+  }, [bootReady]);
 
   useEffect(() => {
     let ticking = false;
@@ -79,7 +94,11 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
           onScrollComplete(shouldShowNav);
 
           // Show hero title animation: either at page top initially or when white content reaches top
-          if (!heroIn && (window.scrollY < 100 || contentRect.top <= 0)) {
+          if (
+            bootReady &&
+            !heroIn &&
+            (window.scrollY < 100 || contentRect.top <= 0)
+          ) {
             setHeroIn(true);
           }
 
@@ -193,7 +212,14 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
       window.removeEventListener("load", runInitialCheck);
       window.removeEventListener("pageshow", runInitialCheck);
     };
-  }, [onScrollComplete, heroIn]);
+  }, [onScrollComplete, heroIn, bootReady]);
+
+  useEffect(() => {
+    if (!bootReady) return;
+    window.requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("scroll"));
+    });
+  }, [bootReady]);
 
   useEffect(() => {
     return () => {
@@ -221,7 +247,7 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
   return (
     <div
       ref={stageRef}
-      className={`intro-stage ${heroIn ? "hero-in" : ""}`}
+      className={`intro-stage ${heroIn ? "hero-in" : ""} ${bootReady ? "boot-ready" : ""}`}
       style={
         {
           "--cover": cover,
