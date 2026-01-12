@@ -11,7 +11,7 @@ export function SkillGroup({ group }: SkillGroupProps) {
   const { t } = useTranslation();
   return (
     <div className="skill-group">
-      <h3 className="skill-category">{t(group.categoryKey)}</h3>
+      <div className="skill-category">{t(group.categoryKey)}</div>
       <p className="skill-description">{t(group.descriptionKey)}</p>
       <div className="skills-list">
         {group.skillKeys.map((skillKey) => (

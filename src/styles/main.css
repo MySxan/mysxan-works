@@ -58,13 +58,14 @@
 .hero-tagline {
   font-size: var(--text-base);
   font-weight: bold;
+  line-height: var(--line-height-normal);
   letter-spacing: -0.01em;
   margin: 0;
 }
 
 .hero-intro {
   font-size: var(--text-base);
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   margin-block-end: 0;
 }
 
@@ -99,6 +100,7 @@
 .hero-skill-list li {
   text-align: right;
   font-size: var(--text-base);
+  line-height: var(--line-height-normal);
   text-transform: uppercase;
   letter-spacing: -0.01em;
   opacity: 100;
@@ -118,7 +120,7 @@
 
 .skill-sub {
   font-size: var(--text-base);
-
+  line-height: var(--line-height-normal);
   letter-spacing: 0.02em;
 }
 
@@ -249,6 +251,7 @@
   color: #fff;
   font-weight: 700;
   font-size: var(--text-base);
+  line-height: var(--line-height-normal);
   text-transform: uppercase;
   letter-spacing: -0.02em;
   text-decoration: none;
@@ -751,6 +754,7 @@ a:hover {
 .tag-lg {
   padding: var(--space-2) var(--space-4);
   font-size: var(--text-base);
+  line-height: var(--line-height-normal);
 }
 
 /* Card Component */
@@ -1297,7 +1301,7 @@ html[lang="zh"] .works-layout {
 
 .about-bio p {
   margin-bottom: var(--space-3);
-  line-height: 1.5;
+  line-height: var(--line-height-normal);
   font-size: var(--text-base);
   color: var(--color-text-muted);
 }
@@ -1338,7 +1342,11 @@ html[lang="zh"] .works-layout {
 }
 
 .skill-category {
-  margin-bottom: var(--space-1);
+  padding-bottom: 5px;
+  font-size: var(--text-xl);
+  font-weight: bold;
+  text-transform: uppercase;
+  line-height: 1;
   hyphens: auto;
   overflow-wrap: break-word;
   word-break: normal;
@@ -1349,7 +1357,7 @@ html[lang="zh"] .works-layout {
   margin: 0 0 var(--space-2);
   font-size: var(--text-base);
   color: var(--color-text-muted);
-  line-height: var(--line-height-relaxed);
+  line-height: var(--line-height-normal);
 }
 
 .skills-list {
@@ -1399,6 +1407,7 @@ html[lang="zh"] .works-layout {
 
 .timeline-vertical {
   display: none;
+  text-align: left;
 }
 
 .orbit-timeline {
@@ -1625,7 +1634,7 @@ html[lang="zh"] .works-layout {
   font-size: var(--text-base);
   color: var(--color-text-muted);
   margin: 0;
-  line-height: 1.6;
+  line-height: var(--line-height-normal);
   opacity: 0.85;
 }
 
@@ -1855,13 +1864,16 @@ html[lang="zh"] .works-layout {
 /* Timeline */
 .timeline {
   position: relative;
-  padding-left: var(--space-4);
+  padding-left: calc(var(--space-3) + 8px);
   margin-top: var(--space-3);
+  max-width: 680px;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .timeline-line {
   position: absolute;
-  left: 6px;
+  left: 0;
   top: 0;
   bottom: 0;
   width: 1px;
@@ -1871,23 +1883,31 @@ html[lang="zh"] .works-layout {
 .timeline-items {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: var(--space-2);
 }
 
 .timeline-item {
   position: relative;
-  padding-left: var(--space-4);
+  padding-left: var(--space-2);
+  --timeline-title-offset: calc(var(--text-sm) + 10px);
 }
 
 .timeline-dot {
   position: absolute;
-  left: 0;
-  top: 6px;
+  left: -12px;
+  top: var(--timeline-title-offset);
   width: 10px;
   height: 10px;
   background: var(--color-bg);
   border: 2px solid var(--color-text);
   border-radius: 50%;
+  box-shadow: 0 0 0 3px var(--color-bg);
+}
+
+.timeline-content {
+  text-align: left;
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .timeline-year {
@@ -1895,17 +1915,21 @@ html[lang="zh"] .works-layout {
   font-size: var(--text-sm);
   text-transform: uppercase;
   letter-spacing: -0.02em;
+  color: var(--color-text-base);
+  margin: 0;
 }
 
 .timeline-title {
   font-weight: 700;
-  margin-bottom: var(--space-1);
+  margin-bottom: 5px;
+  line-height: 1;
 }
 
 .timeline-description {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: var(--line-height-normal);
+  margin: 0;
 }
 
 /* Contact Section */
@@ -2425,6 +2449,7 @@ html[lang="zh"] .works-layout {
 
   .contact-wrapper {
     margin-top: var(--space-1);
+    margin-bottom: var(--space-2);
   }
 
   .footer .container {
@@ -2467,7 +2492,7 @@ html[lang="zh"] .works-layout {
   }
 
   .section {
-    padding: var(--space-3) 0;
+    padding: 0;
     margin-top: 30px;
   }
 

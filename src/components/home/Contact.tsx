@@ -68,7 +68,7 @@ export function Contact() {
               <p className="contact-description">
                 <Trans
                   i18nKey="contact.description"
-                  components={{ br: <br /> }}
+                  components={{ br: <br key="br" /> }}
                 />
               </p>
               <div className="contact-divider contact-divider-intro" />
