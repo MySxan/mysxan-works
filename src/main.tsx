@@ -45,23 +45,6 @@ const initBootLoader = () => {
     window.dispatchEvent(new Event("bootloader:done"));
     return;
   }
-  let hasShown = false;
-  try {
-    hasShown = window.sessionStorage.getItem("boot-loader-shown") === "true";
-  } catch {
-    hasShown = false;
-  }
-  if (hasShown) {
-    document.documentElement.classList.remove("boot-loading");
-    bootLoader.remove();
-    window.dispatchEvent(new Event("bootloader:done"));
-    return;
-  }
-  try {
-    window.sessionStorage.setItem("boot-loader-shown", "true");
-  } catch {
-    // Ignore storage failures and still show once.
-  }
   const forceHide = window.setTimeout(() => {
     document.documentElement.classList.remove("boot-loading");
     bootLoader.remove();

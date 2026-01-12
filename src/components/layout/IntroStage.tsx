@@ -129,6 +129,9 @@ export function IntroStage({ onScrollComplete, children }: IntroStageProps) {
     };
 
     const handleWheelCapture = (e: WheelEvent) => {
+      if (document.documentElement.classList.contains("modal-open")) {
+        return;
+      }
       const now = performance.now();
       const LOCK_COOLDOWN = 500;
 

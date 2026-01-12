@@ -166,10 +166,6 @@
           navigator.userAgent.includes("Prerender"));
       if (isPrerender) {
         root.classList.add("boot-loader-skip");
-      } else if (
-        window.sessionStorage.getItem("boot-loader-shown") === "true"
-      ) {
-        root.classList.add("boot-loader-skip");
       } else {
         root.classList.add("boot-loading");
       }

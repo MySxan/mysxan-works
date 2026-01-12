@@ -473,23 +473,51 @@ export function Works() {
           isOpen={!!selectedWork}
           onClose={() => setSelectedWork(null)}
           title={selectedWork.title}
+          year={String(selectedWork.year)}
           externalLink={{
             url: selectedWork.url,
             label: t("works.modal.viewFullProject"),
           }}
         >
-          <img
-            src={selectedWork.thumbnail}
-            alt={selectedWork.title}
-            className="modal-image"
-          />
-          <div className="modal-details">
-            <p>
-              <strong>{t("works.modal.type")}:</strong> {selectedWork.type}
-            </p>
-            <p>
-              <strong>{t("works.modal.year")}:</strong> {selectedWork.year}
-            </p>
+          <div className="modal-media">
+            <div className="modal-media-primary">
+              <div className="modal-image-frame">
+                <img
+                  src={selectedWork.thumbnail}
+                  alt={selectedWork.title}
+                  className="modal-image"
+                />
+              </div>
+            </div>
+            <div className="modal-media-row">
+              {[selectedWork.thumbnail, selectedWork.thumbnail].map(
+                (src, index) => (
+                  <div className="modal-image-frame" key={`${src}-${index}`}>
+                    <img
+                      src={src}
+                      alt={selectedWork.title}
+                      className="modal-image"
+                    />
+                  </div>
+                ),
+              )}
+            </div>
+          </div>
+          <div className="modal-side">
+            <div className="modal-details">
+              <div className="modal-detail">
+                <div className="modal-detail-label">
+                  {t("works.modal.type")}
+                </div>
+                <div className="modal-detail-value">{selectedWork.type}</div>
+              </div>
+              <div className="modal-detail">
+                <div className="modal-detail-label">
+                  {t("works.modal.year")}
+                </div>
+                <div className="modal-detail-value">{selectedWork.year}</div>
+              </div>
+            </div>
           </div>
         </Modal>
       )}

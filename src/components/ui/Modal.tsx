@@ -7,6 +7,7 @@ interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
+  year?: string;
   children: React.ReactNode;
   externalLink?: {
     url: string;
@@ -18,6 +19,7 @@ export function Modal({
   isOpen,
   onClose,
   title,
+  year,
   children,
   externalLink,
 }: ModalProps) {
@@ -73,7 +75,23 @@ export function Modal({
 
     // Prevent body scroll
     const originalOverflow = document.body.style.overflow;
+    const root = document.documentElement;
     document.body.style.overflow = "hidden";
+    root.classList.add("modal-open");
+    const lenisControl = window as unknown as {
+      __lenis_stop?: () => void;
+      __lenis_start?: () => void;
+    };
+    lenisControl.__lenis_stop?.();
+
+    const modalElement = modalRef.current;
+    const handleScrollBlock = (event: Event) => {
+      event.stopPropagation();
+    };
+    modalElement?.addEventListener("wheel", handleScrollBlock);
+    modalElement?.addEventListener("touchmove", handleScrollBlock, {
+      passive: true,
+    });
 
     // Set initial focus
     if (firstFocusableRef.current) {
@@ -85,6 +103,10 @@ export function Modal({
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = originalOverflow;
+      root.classList.remove("modal-open");
+      lenisControl.__lenis_start?.();
+      modalElement?.removeEventListener("wheel", handleScrollBlock);
+      modalElement?.removeEventListener("touchmove", handleScrollBlock);
     };
   }, [isOpen, onClose]);
 
@@ -109,19 +131,35 @@ export function Modal({
         ref={modalRef}
         role="dialog"
         aria-modal="true"
-        aria-labelledby="modal-title"
+        aria-label={title}
       >
         <div className="modal-header">
-          <h2 id="modal-title" className="modal-title">
-            {title}
-          </h2>
+          <div className="modal-hero">
+            <div className="modal-hero-title">
+              {title}
+              {year && <span className="modal-hero-year">{year}</span>}
+            </div>
+          </div>
           <button
             ref={firstFocusableRef}
             className="modal-close"
             onClick={onClose}
             aria-label={t("modal.close")}
           >
-            <span aria-hidden="true">&times;</span>
+            <svg
+              className="modal-close-icon"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+              focusable="false"
+            >
+              <path
+                d="M6 6l12 12M18 6L6 18"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="square"
+              />
+            </svg>
           </button>
         </div>
 

@@ -17,6 +17,7 @@
   --color-border-light: var(--clr-gray-400);
   --color-shadow: rgba(0, 0, 0, 0.08);
   --color-shadow-lg: rgba(0, 0, 0, 0.15);
+  --navbar-height: 64px;
 
   /* Scrollbar (default/light) */
   --scroll-track: #e6e6e6; /* subtle gray track */
@@ -125,6 +126,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   width: 100%;
+}
+
+.modal-open,
+.modal-open body {
+  overflow: hidden;
 }
 
 /* Typography - headings */
