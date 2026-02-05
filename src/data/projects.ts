@@ -82,7 +82,7 @@ export const showcaseProjects: ShowcaseProject[] = [
       },
       {
         label: "Live Demo",
-        href: "https://mysxan.com/wordle-helper/",
+        href: "https://works.mysxan.com/wordle-helper/",
         variant: "secondary",
       },
     ],
